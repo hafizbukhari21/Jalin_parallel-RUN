@@ -38,7 +38,7 @@ public class WorkflowServices {
         Runnable task = new ScheduleTask(){
           public void run(){
             String message = "";
-            String failedTotal_history = DatabaseUtil.selectData(workflowProp.getProperty("query_check_workflow_failed").replace("$handlerID", handler_id ).replace("$workflowInstance", worklfow_instance ), "total", env);
+            //String failedTotal_history = DatabaseUtil.selectData(workflowProp.getProperty("query_check_workflow_failed").replace("$handlerID", handler_id ).replace("$workflowInstance", worklfow_instance ), "total", env);
             String totalHandler_history = DatabaseUtil.selectData(workflowProp.getProperty("query_check_workflow").replace("$handlerID", handler_id ).replace("$workflowInstance", worklfow_instance ), "total", env); 
             String totalSuccessHandler_history = DatabaseUtil.selectData(workflowProp.getProperty("query_check_workflow_success").replace("$handlerID", handler_id ).replace("$workflowInstance", worklfow_instance ), "total", env); 
 
@@ -57,25 +57,25 @@ public class WorkflowServices {
             // else log.info("Workflow handler = "+handler_id+ " Still Running");
 
             String totalinstance = DatabaseUtil.selectData(workflowProp.getProperty("query_check_restart_rerun_total").replace("$handlerID", handler_id ).replace("$workflowInstance", worklfow_instance ), "total", env);
-            String totalInProgress = DatabaseUtil.selectData(workflowProp.getProperty("query_check_restart_rerun_progress").replace("$handlerID", handler_id ).replace("$workflowInstance", worklfow_instance ), "total", env);
+            //String totalInProgress = DatabaseUtil.selectData(workflowProp.getProperty("query_check_restart_rerun_progress").replace("$handlerID", handler_id ).replace("$workflowInstance", worklfow_instance ), "total", env);
             String totalFinished  = DatabaseUtil.selectData(workflowProp.getProperty("query_check_restart_rerun_finished").replace("$handlerID", handler_id ).replace("$workflowInstance", worklfow_instance ), "total", env);
 
 
             if(Integer.parseInt(totalFinished)< Integer.parseInt(totalinstance)) {
-                message = "Worflow_handler ="+handler_id+" | workflow_instance ="+worklfow_instance+" In Progress";
+                message = "✅ Worflow_handler ="+handler_id+" | workflow_instance ="+worklfow_instance+" In Progress";
                 log.info(message);
                 SendTelegram.sendMessage(message);
             }
             
             else {
                 if (Integer.parseInt(totalHandler_history)== Integer.parseInt(totalSuccessHandler_history)){
-                    message = "Worflow_handler ="+handler_id+" | workflow_instance ="+worklfow_instance+" Success";
+                    message = "✅ Worflow_handler ="+handler_id+" | workflow_instance ="+worklfow_instance+" Success";
                     log.info(message);
                     SendTelegram.sendMessage(message);
                     scheduler.shutdownNow();
                 }
                 else {
-                    message = "Worflow_handler ="+handler_id+" | workflow_instance ="+worklfow_instance+" Gagal";
+                    message = "⚠️ Worflow_handler ="+handler_id+" | workflow_instance ="+worklfow_instance+" Gagal";
                     log.info(message);
                     SendTelegram.sendMessage(message);
                     scheduler.shutdownNow();

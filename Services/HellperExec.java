@@ -46,7 +46,7 @@ public class HellperExec {
             // Wait for the process to complete
             int exitCode = process.waitFor();
             System.out.println("Process exited with code: " + exitCode);
-            SendTelegram.sendMessage("Berhasil menjalankan Helper");
+            SendTelegram.sendMessage("✅ Berhasil menjalankan Helper");
 
 
             // Delete Source 2000 Once Done
@@ -54,6 +54,7 @@ public class HellperExec {
             
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
+            SendTelegram.sendMessage("❌ terhadi kesalahan saat menjalankan helper 2000");
         }
     }
     private void Processing(InputStream process){
@@ -70,9 +71,11 @@ public class HellperExec {
     private void deleteSource2000(String date, Integer env){
         try {
             DatabaseUtil.deletedQuery(progProp.getProperty("deleteRowData").replace("$source","2000").replace("$date", date), "source_data", env);
-            SendTelegram.sendMessage("Berhasil Menghapus Source 2000");
+            SendTelegram.sendMessage("✅ Berhasil Menghapus Source 2000");
         } catch (Exception e) {
-            SendTelegram.sendMessage("Gagal Mengapus Source 2000 Dari Source Data");
+            SendTelegram.sendMessage("❌ Gagal Mengapus Source 2000 Dari Source Data");
+            
+            
 
             // TODO: handle exception
         }

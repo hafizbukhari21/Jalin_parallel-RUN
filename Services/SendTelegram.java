@@ -38,7 +38,7 @@ public class SendTelegram {
                 .append(CHAT_ID)
                 .append("\",")
                 .append("\"text\":\"")
-                .append(message)
+                .append(message) 
                 .append("\"")
                 .append("}")
                 .toString();
@@ -51,7 +51,7 @@ public class SendTelegram {
             // }
 
             OutputStream os = conn.getOutputStream();
-            os.write(json.toString().getBytes());
+            os.write(json.toString().getBytes(StandardCharsets.UTF_8));
             os.flush();
             os.close();
 

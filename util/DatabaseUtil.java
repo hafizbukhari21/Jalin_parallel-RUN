@@ -13,6 +13,8 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
+import Services.SendTelegram;
+
 public class DatabaseUtil {
 	private static Properties properties = PropertiesUtil.getInstance().getDbProp();
 	private static Properties progProp = PropertiesUtil.getInstance().getProgProp();
@@ -47,6 +49,7 @@ public class DatabaseUtil {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			log.error(e);
+			SendTelegram.sendMessage("❌ DB Connection Issues");
 		} 		
 		return con;
 	}

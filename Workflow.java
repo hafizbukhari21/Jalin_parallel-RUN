@@ -1,4 +1,5 @@
 import Services.MainService;
+import util.DateConvertion;
 
 public class Workflow {
     public static void main(String[] args ){
@@ -8,8 +9,8 @@ public class Workflow {
          * arg 1 = ENV  1=VIT|2=Staging
          * 
          */
-        String date = "20240505";
-        String envS = "2";
+        String date = DateConvertion.DateInputReformated(args[0]);
+        String envS = args[1];
         Integer env = Integer.parseInt(envS);
 
 

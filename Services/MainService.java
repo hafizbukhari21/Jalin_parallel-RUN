@@ -29,8 +29,11 @@ public class MainService {
         String newDatePrev = DateConvertion.NewDateFormatPrev(date) ;
         try {
             DatabaseUtil.executeUpdate(progProp.getProperty("update_process_control").replace("$date", newDate).replace("$prevDate", newDatePrev), env);
+            SendTelegram.sendMessage("✅ Set Process Control Date On "+env+" and date On : "+date);
         } catch (Exception e) {
             logger.error(e);
+            SendTelegram.sendMessage("❌ Set Process Control Date On "+env+" Failed");
+
         }
     }
 
@@ -53,9 +56,9 @@ public class MainService {
  
        //Delete process_que_transaction
        DatabaseUtil.deletedQuery(progProp.getProperty("deleteAllRT").replace("$tableName", "process_queue_trans_batch"),"process_queue_trans_batch", env );
-       SendTelegram.sendMessage("Berhasil menghapus data di RT_clearing");
+       SendTelegram.sendMessage("✅ Berhasil menghapus data di RT_clearing");
      } catch (Exception e) {
-      SendTelegram.sendMessage("Terjadi kesalahan saat menghapus data di rt_clearing");
+      SendTelegram.sendMessage("❌ Terjadi kesalahan saat menghapus data di rt_clearing");
 
       // TODO: handle exception
      }
@@ -77,10 +80,11 @@ public class MainService {
       try {
         totalExcecuted = DatabaseUtil.executeUpdate(progProp.getProperty("push_source_one").replace("$date", date).replace("$prev_date",prevDate).replace("$next_date",nextDate), env);
         logger.info("Total Source 1 Updated reason_unprocessed: "+totalExcecuted+" Data");
-        SendTelegram.sendMessage("Total Source 1 Pushed to be reason_unprocessed: "+totalExcecuted+" Data");
+        SendTelegram.sendMessage("✅ Total Source 1 Pushed to be reason_unprocessed: "+totalExcecuted+" Data");
 
       } catch (Exception e) {
         logger.info(e);
+        SendTelegram.sendMessage("❌ Terjadi kesalahan Saat pengecekan source 1 reason_unprocessed");
       }
       
     }
@@ -93,7 +97,7 @@ public class MainService {
           public void run(){
             String totRemain = DatabaseUtil.selectData(progProp.getProperty("source_one_select"), "totalData", env);
             logger.info("Total Source 1 Unprocessed:"+totRemain+" Remainings");
-            SendTelegram.sendMessage("Total Source 1 Unprocessed:"+totRemain+" Remainings");
+            SendTelegram.sendMessage("✅ Total Source 1 Unprocessed:"+totRemain+" Remainings");
 
             if(totRemain.equals("0")) scheduler.shutdownNow();
           }
@@ -123,16 +127,25 @@ public class MainService {
       String route_recon_elastic_staging = progProp.getProperty("route_recon_elastic_staging");
       String endpoint = "http://"+progProp.getProperty("url_elastic")+"/";
 
-      
-      if(env ==1){
-        //Reset VIT
-        HTTPService.httpRun(endpoint+route_ej_elastic_vit);
-        HTTPService.httpRun(endpoint+route_recon_elastic_vit);
-      }
-      else{
-        //Reset Staging
-        HTTPService.httpRun(endpoint+route_ej_elastic_staging);
-        HTTPService.httpRun(endpoint+route_recon_elastic_staging);
+      try {
+        
+        if(env ==1){
+          //Reset VIT
+          HTTPService.httpRun(endpoint+route_ej_elastic_vit);
+          HTTPService.httpRun(endpoint+route_recon_elastic_vit);
+          SendTelegram.sendMessage("✅ Elastic On VIT has been deleted");
+        }
+        else{
+          //Reset Staging
+          HTTPService.httpRun(endpoint+route_ej_elastic_staging);
+          HTTPService.httpRun(endpoint+route_recon_elastic_staging);
+          SendTelegram.sendMessage("✅ Elastic On Staging DEV has been deleted");
+
+        }
+      } catch (Exception e) {
+        // TODO: handle exception
+        logger.error(e);
+        SendTelegram.sendMessage("❌ Failed to delete elastic");
       }
 
     }
@@ -141,10 +154,11 @@ public class MainService {
     public static void deleteCounterInvoice(Integer env){
       try {
         DatabaseUtil.deletedQuery(progProp.getProperty("deleteCounter_invoice"), "TIERED_FEE_PERSISTANT_COUNT rennaisance_prop", env);
-        SendTelegram.sendMessage("Berhasil menghapus Conter invoice bulanan TIERED_FEE_PERSISTANT_COUNT");
+        SendTelegram.sendMessage("✅ Berhasil menghapus Conter invoice bulanan TIERED_FEE_PERSISTANT_COUNT");
 
       } catch (Exception e) {
         logger.info(e);
+        SendTelegram.sendMessage("❌ Gagal menghapus Counter invoice");
       }
 
     }
