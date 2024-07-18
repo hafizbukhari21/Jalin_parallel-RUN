@@ -37,7 +37,8 @@ public class WorkflowATMController {
                 WorkflowServices.GenerateReport(worfklow_instance, env, workflowId);
                 break;
             case 10:
-
+                workflowId = workflowProp.getProperty("workflow_id_mandiri");;
+                WorkflowServices.GenerateReport(worfklow_instance, env, workflowId);
                 //Run Mandiri Specifict
                 break;
         
