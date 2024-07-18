@@ -1,0 +1,88 @@
+{
+    "env":[
+        {
+            "env_name" :"vit",
+            "id":1,
+            "workflow_list":[
+                {
+                    "workflow_name":"Atm Controller",
+                    "workflow_id":"",
+                    "workflow_instance":""
+                },
+                {
+                    "workflow_name":"EJ",
+                    "workflow_id":"",
+                    "workflow_instance":""
+                },
+                {
+                    "workflow_name":"Mandiri Specifict",
+                    "workflow_id":"",
+                    "workflow_instance":""
+                }
+            ]
+        },
+        {
+            "env_name" :"staging dev",
+            "id":2,
+            "workflow_list":[
+                {
+                    "workflow_name":"Atm Controller",
+                    "workflow_id":"ATM_CONTROLLER",
+                    "workflow_instance":"d397bd79-8adb-4b75-90c6-c607776865eb"
+                },
+                {
+                    "workflow_name":"EJ",
+                    "workflow_id":"",
+                    "workflow_instance":""
+                },
+                {
+                    "workflow_name":"Mandiri Specifict",
+                    "workflow_id":"",
+                    "workflow_instance":""
+                }
+            ]
+        },
+        {
+            "env_name" :"SIT",
+            "id":3,
+            "workflow_list":[
+                {
+                    "workflow_name":"Atm Controller",
+                    "workflow_id":"",
+                    "workflow_instance":""
+                },
+                {
+                    "workflow_name":"EJ",
+                    "workflow_id":"",
+                    "workflow_instance":""
+                },
+                {
+                    "workflow_name":"Mandiri Specifict",
+                    "workflow_id":"",
+                    "workflow_instance":""
+                }
+            ]
+        },
+        {
+            "env_name" :"UAT",
+            "id":4,
+            "workflow_list":[
+                {
+                    "workflow_name":"Atm Controller",
+                    "workflow_id":"",
+                    "workflow_instance":""
+                },
+                {
+                    "workflow_name":"EJ",
+                    "workflow_id":"",
+                    "workflow_instance":""
+                },
+                {
+                    "workflow_name":"Mandiri Specifict",
+                    "workflow_id":"",
+                    "workflow_instance":""
+                }
+            ]
+        }
+    ]
+}

@@ -42,20 +42,6 @@ public class WorkflowServices {
             String totalHandler_history = DatabaseUtil.selectData(workflowProp.getProperty("query_check_workflow").replace("$handlerID", handler_id ).replace("$workflowInstance", worklfow_instance ), "total", env); 
             String totalSuccessHandler_history = DatabaseUtil.selectData(workflowProp.getProperty("query_check_workflow_success").replace("$handlerID", handler_id ).replace("$workflowInstance", worklfow_instance ), "total", env); 
 
-            // if(Integer.parseInt(failedTotal)>0) {
-            //     message = "Worflow_handler ="+handler_id+" | workflow_instance ="+worklfow_instance+" Gagal";
-            //     log.error(message);
-            //     SendTelegram.sendMessage(message);
-            //     scheduler.shutdownNow();
-            // }
-            // else if (Integer.parseInt(totalHandler)== Integer.parseInt(totalSuccessHandler)){
-            //     message = "Worflow_handler ="+handler_id+" | workflow_instance ="+worklfow_instance+" Success";
-            //     log.info(message);
-            //     SendTelegram.sendMessage(message);
-            //     scheduler.shutdownNow();
-            // }
-            // else log.info("Workflow handler = "+handler_id+ " Still Running");
-
             String totalinstance = DatabaseUtil.selectData(workflowProp.getProperty("query_check_restart_rerun_total").replace("$handlerID", handler_id ).replace("$workflowInstance", worklfow_instance ), "total", env);
             //String totalInProgress = DatabaseUtil.selectData(workflowProp.getProperty("query_check_restart_rerun_progress").replace("$handlerID", handler_id ).replace("$workflowInstance", worklfow_instance ), "total", env);
             String totalFinished  = DatabaseUtil.selectData(workflowProp.getProperty("query_check_restart_rerun_finished").replace("$handlerID", handler_id ).replace("$workflowInstance", worklfow_instance ), "total", env);
@@ -80,22 +66,22 @@ public class WorkflowServices {
                     SendTelegram.sendMessage(message);
                     scheduler.shutdownNow();
                 }
-
             }
-
           }
-
-          
         };
         scheduler.scheduleAtFixedRate(task, 0, 1, TimeUnit.MINUTES);
     }
 
 
-    public static void GenerateReportATM_Controller(String workflowInstance,Integer env){
-        String handlerId = workflowProp.getProperty("workflow_id_atmController");
-        //String workflowInstance =  workflowProp.getProperty("worflow_instance_atmController");
-
-        workflowUpdate(handlerId,workflowInstance, env);
-        checkWorkflow(handlerId, workflowInstance, env);
+    public static void GenerateReport(String workflowInstance,Integer env, String workflowID){
+        workflowUpdate(workflowID,workflowInstance, env);
+        checkWorkflow(workflowID, workflowInstance, env);
     }
+
+
+    private static void ReadWorkflowFile(){
+        
+    }
+
+    
 }
