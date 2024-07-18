@@ -1,5 +1,6 @@
 import java.util.Properties;
 
+import Services.ConstructJSON_Workflow;
 import Services.WorkflowServices;
 import util.PropertiesUtil;
 
@@ -31,16 +32,21 @@ public class WorkflowATMController {
                 WorkflowServices.GenerateReport(worfklow_instance, env, workflowId);
                 break;
             case 9:
-                
                 //Run EJ    
+                workflowId = workflowProp.getProperty("workflow_id_ej");;
+                WorkflowServices.GenerateReport(worfklow_instance, env, workflowId);
                 break;
             case 10:
+
                 //Run Mandiri Specifict
                 break;
         
             default:
                 break;
         }
+
+        // ConstructJSON_Workflow constructJSON_Workflow = new ConstructJSON_Workflow();
+        // constructJSON_Workflow.extractJsonWokrflow();
         
     }
 }
