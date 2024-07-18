@@ -179,7 +179,7 @@ public class DatabaseUtil {
 	    try {
 	    	stmt = con.createStatement();
 			  ResultSet rset = stmt.executeQuery(query);
-			  FileWriter fileWriter = new FileWriter("BackupSource2000/"+envName+"_Source2000_"+date+".sql");
+			  FileWriter fileWriter = new FileWriter(progProp.getProperty("PATH_BACKUP_2000")+envName+"_Source2000_"+date+".sql");
 			  Integer columnCount = rset.getMetaData().getColumnCount();
 
 			  while (rset.next()) {
