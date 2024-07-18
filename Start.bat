@@ -1,7 +1,6 @@
 @echo off
-set /p arg1=Masukkan Date "YYYYMMMDD"
 
 
-java -Xms512m -Xmx6048m -jar PreRun.jar "%arg1%"  
+java -Xms512m -Xmx6048m -jar Main.jar 2024-06-24 2 2 6
 pause
 

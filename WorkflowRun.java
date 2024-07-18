@@ -4,7 +4,7 @@ import Services.ConstructJSON_Workflow;
 import Services.WorkflowServices;
 import util.PropertiesUtil;
 
-public class WorkflowATMController {
+public class WorkflowRun {
     private static Properties workflowProp = PropertiesUtil.getInstance().getworkflowProp();
     public static void main(String[] args ){
         
@@ -27,13 +27,13 @@ public class WorkflowATMController {
 
         switch (process_id) {
             case 8:
-                //Run ATM Controller
-                workflowId = workflowProp.getProperty("workflow_id_atmController");;
+                //Run EJ    
+                workflowId = workflowProp.getProperty("workflow_id_ej");;
                 WorkflowServices.GenerateReport(worfklow_instance, env, workflowId);
                 break;
             case 9:
-                //Run EJ    
-                workflowId = workflowProp.getProperty("workflow_id_ej");;
+                //Run ATM Controller
+                workflowId = workflowProp.getProperty("workflow_id_atmController");;
                 WorkflowServices.GenerateReport(worfklow_instance, env, workflowId);
                 break;
             case 10:
