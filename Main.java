@@ -58,6 +58,11 @@ class Main {
             runhelper(envS, multipleDate, date);
           break;
 
+          case 8:
+            //Delete Source 2000
+            MainService.deleteSource2000(date, env, multipleDate);
+          break;
+
           default:
           break;
       }

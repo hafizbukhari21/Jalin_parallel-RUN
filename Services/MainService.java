@@ -65,6 +65,26 @@ public class MainService {
 
     }
 
+    public static void deleteSource2000(String date, Integer env, Integer multipleDate){
+      String prevDate = date;
+      String nextDate = date;
+    
+    //Run before and afterr Date if argumentes return 2
+    if(multipleDate == 2){
+      prevDate = DateConvertion.SetDate(date, false);
+      nextDate = DateConvertion.SetDate(date, true);
+    }
+    
+    try {
+      DatabaseUtil.deletedQuery(progProp.getProperty("deleteRowDataMultiDate").replace("$date", date).replace("$prev_date",prevDate).replace("$next_date",nextDate).replace("$source", "2000"),"source_data", env);
+      logger.info("Berhasil Menghapus source 2000 pada tanggal ("+date+","+prevDate+","+nextDate+")");
+      SendTelegram.sendMessage("✅ Berhasil Menghapus source 2000 pada tanggal ("+date+","+prevDate+","+nextDate+")");
+    } catch (Exception e) {
+      logger.info(e);
+      SendTelegram.sendMessage("❌ Terjadi kesalahan saat menghapus source 2000");
+    }
+    }
+
 
     public static void pushSourceOne(String date, Integer env, Integer multipleDate){
         String prevDate = date;

@@ -49,8 +49,8 @@ public class HellperExec {
             SendTelegram.sendMessage("✅ Berhasil menjalankan Helper");
 
 
-            // Delete Source 2000 Once Done
-            deleteSource2000(date, Integer.parseInt(env));
+            // // Delete Source 2000 Once Done
+            // deleteSource2000(date, Integer.parseInt(env));
             
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
@@ -68,19 +68,7 @@ public class HellperExec {
                 }
     }
 
-    private void deleteSource2000(String date, Integer env){
-        try {
-            DatabaseUtil.deletedQuery(progProp.getProperty("deleteRowData").replace("$source","2000").replace("$date", date), "source_data", env);
-            SendTelegram.sendMessage("✅ Berhasil Menghapus Source 2000");
-        } catch (Exception e) {
-            SendTelegram.sendMessage("❌ Gagal Mengapus Source 2000 Dari Source Data");
-            
-            
-
-            // TODO: handle exception
-        }
-    }
-
+    
     
 }
 
