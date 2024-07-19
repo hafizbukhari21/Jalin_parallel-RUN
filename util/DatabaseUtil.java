@@ -183,9 +183,10 @@ public class DatabaseUtil {
 			  Integer columnCount = rset.getMetaData().getColumnCount();
 
 			  while (rset.next()) {
-				StringBuilder insertQuery = new StringBuilder("INSERT INTO ");
+				StringBuilder insertQuery = new StringBuilder("");
+				insertQuery.append("DELETE FROM `source_data` WHERE `system_id`="+rset.getString(1)+";\n");
 
-                insertQuery.append("`source_data`").append(" (");
+                insertQuery.append("INSERT INTO `source_data`").append(" (");
 
                 // Append column names
                 for (int i = 1; i <= columnCount; i++) {
@@ -230,7 +231,11 @@ public class DatabaseUtil {
 	    }
 		return 0;
 	}
+
+	
 }
+
+
 
 
 
